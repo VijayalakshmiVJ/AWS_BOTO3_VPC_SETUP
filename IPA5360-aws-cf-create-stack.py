@@ -67,17 +67,20 @@ class VpcResource():
 
     def create_public_subnets(self):
         print "*" * 130 + "\nCreating public subnets"
-        self.public_subnet1 = self.resource.create_subnet(CidrBlock='10.0.1.0/24', VpcId=self.vpc.id, AvailabilityZone=self.input_params['Zone1'])
+        self.public_subnet1 = self.resource.create_subnet(CidrBlock='10.0.1.0/24', VpcId=self.vpc.id,
+                                                          AvailabilityZone=self.input_params['Zone1'])
         self.public_subnet1.create_tags(Tags=[{"Key": "Name", "Value": self.input_params['PublicSubnet1']}])
         print "Created %s with ID = %s CIDR = %s and Availability Zone = %s " \
               % (self.input_params['PublicSubnet1'], self.public_subnet1.id, '10.0.1.0/24',self.input_params['Zone1'])
 
-        self.public_subnet2 = self.resource.create_subnet(CidrBlock='10.0.2.0/24', VpcId=self.vpc.id,AvailabilityZone=self.input_params['Zone2'])
+        self.public_subnet2 = self.resource.create_subnet(CidrBlock='10.0.2.0/24', VpcId=self.vpc.id,
+                                                          AvailabilityZone=self.input_params['Zone2'])
         self.public_subnet2.create_tags(Tags=[{"Key": "Name", "Value": self.input_params['PublicSubnet2']}])
         print "Created %s with ID = %s CIDR = %s and Availability Zone = %s " \
               % (self.input_params['PublicSubnet2'], self.public_subnet2.id, '10.0.2.0/24',self.input_params['Zone2'])
 
-        self.public_subnet3 = self.resource.create_subnet(CidrBlock='10.0.3.0/24', VpcId=self.vpc.id, AvailabilityZone=self.input_params['Zone3'])
+        self.public_subnet3 = self.resource.create_subnet(CidrBlock='10.0.3.0/24', VpcId=self.vpc.id,
+                                                          AvailabilityZone=self.input_params['Zone3'])
         self.public_subnet3.create_tags(Tags=[{"Key": "Name", "Value": self.input_params['PublicSubnet3']}])
         print "Created %s with ID = %s CIDR = %s and Availability Zone = %s " \
               % (self.input_params['PublicSubnet3'], self.public_subnet3.id, '10.0.3.0/24', self.input_params['Zone3'])
@@ -85,17 +88,20 @@ class VpcResource():
 
     def create_private_subnets(self):
         print "*" * 130 + "\nCreating private subnets"
-        self.private_subnet1 = self.resource.create_subnet(CidrBlock='10.0.4.0/24', VpcId=self.vpc.id, AvailabilityZone=self.input_params['Zone1'])
+        self.private_subnet1 = self.resource.create_subnet(CidrBlock='10.0.4.0/24', VpcId=self.vpc.id,
+                                                           AvailabilityZone=self.input_params['Zone1'])
         self.private_subnet1.create_tags(Tags=[{"Key": "Name", "Value": self.input_params['PrivateSubnet1']}])
         print "Created %s with ID = %s CIDR = %s and Availability Zone = %s " \
               % (self.input_params['PrivateSubnet1'], self.private_subnet1.id, '10.0.4.0/24',self.input_params['Zone1'])
 
-        self.private_subnet2 = self.resource.create_subnet(CidrBlock='10.0.5.0/24',VpcId=self.vpc.id, AvailabilityZone=self.input_params['Zone2'])
+        self.private_subnet2 = self.resource.create_subnet(CidrBlock='10.0.5.0/24',VpcId=self.vpc.id,
+                                                           AvailabilityZone=self.input_params['Zone2'])
         self.private_subnet2.create_tags(Tags=[{"Key": "Name", "Value": self.input_params['PrivateSubnet2']}])
         print "Created %s with ID = %s CIDR = %s and Availability Zone = %s " \
               % (self.input_params['PrivateSubnet2'], self.private_subnet2.id, '10.0.5.0/24',self.input_params['Zone2'])
 
-        self.private_subnet3 = self.resource.create_subnet(CidrBlock='10.0.6.0/24', VpcId=self.vpc.id, AvailabilityZone=self.input_params['Zone3'])
+        self.private_subnet3 = self.resource.create_subnet(CidrBlock='10.0.6.0/24', VpcId=self.vpc.id,
+                                                           AvailabilityZone=self.input_params['Zone3'])
         self.private_subnet3.create_tags(Tags=[{"Key": "Name", "Value": self.input_params['PrivateSubnet3']}])
         print "Created %s with ID = %s CIDR = %s and Availability Zone = %s " \
               % (self.input_params['PrivateSubnet3'], self.private_subnet3.id, '10.0.6.0/24', self.input_params['Zone3'])
