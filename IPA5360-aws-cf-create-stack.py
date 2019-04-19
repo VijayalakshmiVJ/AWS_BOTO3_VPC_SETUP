@@ -17,26 +17,12 @@ class VpcResource():
         self.private_subnet3 = None
         self.public_route_table = None
         self.private_route_table = None
-        self.input_params = self.s3_store_retrieve_input_params()
+        self.input_params = self.s3_retrieve_input_params()
 
 
-    def s3_store_retrieve_input_params(self):
+    def s3_retrieve_input_params(self):
         s3_resource = boto3.resource('s3')
         s3 = boto3.client('s3')
-        inputList = {'Region': 'us-east-1', 'VPC_CIDR': '10.0.0.0/16', 'VPC_NAME': 'STACK_NAME-IPA5360-VPC',
-                     'Zone1': 'us-east-1a', 'Zone2': 'us-east-1b', 'Zone3': 'us-east-1c',
-                     'IGW_NAME': 'STACK_NAME-IPA5360-InternetGateway',
-                     'PublicSubnet1': 'STACK_NAME-IPA5360-public-subnet-1',
-                     'PublicSubnet2': 'STACK_NAME-IPA5360-public-subnet-2',
-                     'PublicSubnet3': 'STACK_NAME-IPA5360-public-subnet-3',
-                     'PrivateSubnet1': 'STACK_NAME-IPA5360-private-subnet-1',
-                     'PrivateSubnet2': 'STACK_NAME-IPA5360-private-subnet-2',
-                     'PrivateSubnet3': 'STACK_NAME-IPA5360-private-subnet-3',
-                     'PublicRouteTable_Name': 'STACK_NAME-IPA5360-public-route-table',
-                     'PrivateRouteTable_Name': 'STACK_NAME-IPA5360-private-route-table'}
-        serializedListObject = pickle.dumps(inputList)
-        s3_resource.create_bucket(Bucket="inputparamsbucketipa5360")
-        s3.put_object(Bucket='inputparamsbucketipa5360', Key='myList001', Body=serializedListObject)
         object = s3.get_object(Bucket='inputparamsbucketipa5360', Key='myList001')
         serializedObject = object['Body'].read()
         inputList = pickle.loads(serializedObject)
@@ -137,7 +123,6 @@ class VpcResource():
         self.private_route_table.associate_with_subnet(SubnetId=self.private_subnet2.id)
         self.private_route_table.associate_with_subnet(SubnetId=self.private_subnet3.id)
         print "Attached private route table to all 3 private subnets"
-
 
 
 if __name__ == '__main__':
