@@ -21,7 +21,6 @@ class VpcResource():
 
 
     def s3_retrieve_input_params(self):
-        s3_resource = boto3.resource('s3')
         s3 = boto3.client('s3')
         object = s3.get_object(Bucket='inputparamsbucketipa5360', Key='myList001')
         serializedObject = object['Body'].read()
@@ -124,6 +123,15 @@ class VpcResource():
         self.private_route_table.associate_with_subnet(SubnetId=self.private_subnet3.id)
         print "Attached private route table to all 3 private subnets"
 
+   
+    def s3_store_vpc_id(self):
+        s3_resource = boto3.resource('s3')
+        s3 = boto3.client('s3')
+        vpcList = {'vpc_id': self.vpc.id}
+        serializedListObject = pickle.dumps(vpcList)
+        s3_resource.create_bucket(Bucket="vpcparamsbucketipa5360")
+        s3.put_object(Bucket='vpcparamsbucketipa5360', Key='myVpc001', Body=serializedListObject)
+
 
 if __name__ == '__main__':
     ec2_resource = VpcResource()
@@ -140,6 +148,8 @@ if __name__ == '__main__':
 
     ec2_resource.create_private_route_table()
     ec2_resource.attach_private_route_tables_subnets()
+
+    ec2_resource.s3_store_vpc_id()
 
 
 
