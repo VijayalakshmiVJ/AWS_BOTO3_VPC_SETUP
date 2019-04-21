@@ -48,6 +48,6 @@ for rt in vpc.route_tables.all():
 
 # Finally, delete the vpc
 ec2client.delete_vpc(VpcId=vpcid)
-print "VPC %s deleted successfully!", vpcid
+print "VPC %s deleted successfully!" % vpcid
 
 
